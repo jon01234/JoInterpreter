@@ -1,0 +1,19 @@
+{
+  "files.associations": {
+    "*.ejs": "html",
+    "*.ast": "json",
+    "*.cpp": "cuda-cpp",
+    "array": "c",
+    "*.tcc": "c",
+    "chrono": "c",
+    "functional": "c",
+    "mutex": "c",
+    "tuple": "c",
+    "variant": "c",
+    "*.inc": "c",
+    "*.def": "c",
+    "cstring": "c",
+    "lexer.h": "c",
+    "stddef.h": "c"
+  }
+}

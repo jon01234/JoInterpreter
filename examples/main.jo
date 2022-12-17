@@ -1,0 +1,8 @@
+function main()->int
+{
+    a->int = 120;
+    b->int = 12;
+    return->int = 20;
+}
+
+main();
