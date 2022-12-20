@@ -1,5 +1,4 @@
 #include "include/JoInterpreter.h"
-#include "include/IO.h"
 
 int main(int argc, char** argv)
 {

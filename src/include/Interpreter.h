@@ -7,7 +7,9 @@
 
 typedef struct Interpreter
 {
+    unsigned int function_count;
     Node** functions;
+    unsigned int variable_count;
     Node** variables;
 } Interpreter;
 

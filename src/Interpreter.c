@@ -1,8 +1,16 @@
 #include "include/Interpreter.h"
+#include <stdlib.h>
 
 Interpreter* CreateInterpreter()
 {
-    return NULL;
+    Interpreter* interpreter = calloc(1, sizeof(Interpreter));
+
+    interpreter->function_count = 0;
+    interpreter->functions = NULL;
+    interpreter->variable_count = 0;
+    interpreter->variables = NULL;
+
+    return interpreter;
 }
 
 void Interpret_Statement(Interpreter* interpreter, Node* statement)
@@ -21,37 +29,32 @@ void Interpret_Statement(Interpreter* interpreter, Node* statement)
 
 void Interpret_FunctionDecl(Interpreter* interpreter, Node* function)
 {
-    for (int i = 0; i < function->function_body_size; i++)
+    const Node* last_node = function->function_body[function->function_body_size - 1];
+    // We are not on the return and it's the end
+    if (!(last_node->type == NODE_VARIABLE_DECL && strcmp(last_node->variable_decl_name, "return") == 0))
     {
-        Node* current_node = function->function_body[i];
-
-        if (i != function->function_body_size - 1) // Not the end of function
-        {
-            Interpret_Statement(interpreter, current_node);
-        }
-        // We are on the return
-        else if (i == function->function_body_size - 1 && current_node->type == NODE_VARIABLE_DECL && strcmp(current_node->variable_decl_name, "return") == 0)
-        {
-            function->function_return_value = current_node;
-        }
-        else
-        {
-            Error("Every function must end with a return statement");
-        }
+        Error("Every function must end with a return statement");
     }
+    
+    interpreter->function_count += 1;
+    interpreter->functions = realloc(interpreter->functions, interpreter->function_count);
+
+    interpreter->functions[interpreter->function_count] = function;
 }
 
 void Interpret_FunctionCall(Interpreter* interpreter, Node* function)
 {
-
+    // Lookup if function name exist in interpreter
+    // Parse everything in the function
 }
 
 void Interpret_VariableDecl(Interpreter* interpreter, Node* variable)
 {
-
+    // Add variable to interpreter
 }
 
 void Interpret_Variable(Interpreter* interpreter, Node* variable)
 {
-
+    // Lookup if variable name exists in interpreter
+    // TODO: Think what i should do next
 }
