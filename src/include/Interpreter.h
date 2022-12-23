@@ -9,8 +9,10 @@ typedef struct Interpreter
 {
     unsigned int function_count;
     Node** functions;
+    char** function_names;
     unsigned int variable_count;
     Node** variables;
+    char** variable_names;
 } Interpreter;
 
 /**

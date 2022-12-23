@@ -5,4 +5,24 @@ function main()->int
     return->int = 20;
 }
 
+function hello()->int
+{
+    return->int = 10;
+}
+
 main();
+
+function b()->int
+{
+    return->int = 5;
+}
+
+function three()->int
+{
+    return->int = 3;
+}
+
+b();
+main();
+three();
+hello();

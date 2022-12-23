@@ -1,4 +1,5 @@
 #include "include/Parser.h"
+#include "include/Print.h"
 
 Parser* CreateParser(Lexer* lexer)
 {
@@ -189,12 +190,13 @@ Node* Parser_ParseFunctionBody(Parser* parser, Node* node)
 
 Node* Parser_ParseFunctionCall(Parser* parser)
 {
-    // current_token is identifier because this is a statement
+    // prev_token is identifier because this is a statement
     Node* node = CreateNode(NODE_FUNCTION_CALL);
-    node->function_call_name = parser->current_token->value;
+    node->function_call_name = parser->prev_token->value;
 
     Parser_Next(parser);
 
+    // Same concept as function decl args
     if (parser->current_token->type == TOKEN_RPAREN) // ')' no arguments
     {
         Parser_Expect(parser, TOKEN_RPAREN);
@@ -202,7 +204,6 @@ Node* Parser_ParseFunctionCall(Parser* parser)
         return node;
     }
 
-    // Same concept as function decl args
     node->function_call_args = calloc(1, sizeof(struct Node*));
     node->function_call_args[0] = CreateNode(NODE_FUNCTION_ARG);
 
