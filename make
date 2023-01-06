@@ -40,6 +40,11 @@
         "file": "/home/jonathan/Dev/JoInterpreter/src/Token.c"
     },
     {
+        "command": "gcc -c -g -Wall src/Utils.c -o src/Utils.o",
+        "directory": "/home/jonathan/Dev/JoInterpreter",
+        "file": "/home/jonathan/Dev/JoInterpreter/src/Utils.c"
+    },
+    {
         "command": "gcc -c -g -Wall src/main.c -o src/main.o",
         "directory": "/home/jonathan/Dev/JoInterpreter",
         "file": "/home/jonathan/Dev/JoInterpreter/src/main.c"

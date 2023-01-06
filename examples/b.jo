@@ -3,11 +3,10 @@ function main()->int
     return->int = 10;
 }
 
-main();
-
 function hello()->int
 {
-        return->int = 20;
+    return->int = 20;
 }
 
+main();
 hello();

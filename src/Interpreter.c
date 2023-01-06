@@ -1,6 +1,7 @@
 #include "include/Interpreter.h"
 #include "include/Print.h"
 #include "include/Utils.h"
+#include <stdlib.h>
 #include <string.h>
 
 Interpreter* CreateInterpreter()
@@ -40,6 +41,7 @@ void Interpret_FunctionDecl(Interpreter* interpreter, Node* function)
             interpreter->function_count,
             function->function_name
         );
+
     // In that case throw error
     if (function_exist != -1)
     {
@@ -57,8 +59,9 @@ void Interpret_FunctionDecl(Interpreter* interpreter, Node* function)
     }
     
     interpreter->function_count += 1;
-    interpreter->functions = realloc(interpreter->functions, interpreter->function_count);
-    interpreter->function_names = realloc(interpreter->function_names, interpreter->function_count);
+    // Realloc problem isn't here
+    interpreter->functions = realloc(interpreter->functions, sizeof(interpreter->functions) * interpreter->function_count);
+    interpreter->function_names = realloc(interpreter->function_names, sizeof(interpreter->function_names) * interpreter->function_count);
 
     interpreter->functions[interpreter->function_count - 1] = function;
     interpreter->function_names[interpreter->function_count - 1] = function->function_name;
@@ -67,6 +70,7 @@ void Interpret_FunctionDecl(Interpreter* interpreter, Node* function)
 void Interpret_FunctionCall(Interpreter* interpreter, Node* function)
 {
     // Lookup if function name exist in interpreter
+    qsort(interpreter->function_names, interpreter->function_count, sizeof(char*), cmp_string);
     unsigned int function_index = sorted_string_search(
             interpreter->function_names, 
             interpreter->function_count, 
@@ -104,5 +108,5 @@ void Interpret_VariableDecl(Interpreter* interpreter, Node* variable)
 void Interpret_Variable(Interpreter* interpreter, Node* variable)
 {
     // Lookup if variable name exists in interpreter
-    // TODO: Think what i should do next
+    // TODO: Think what I should do next
 }
